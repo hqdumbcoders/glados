@@ -1,20 +1,20 @@
-# Используем официальный образ Python
+# Use official Python image
 FROM python:3.12-slim
 
-# Устанавливаем рабочую директорию внутри контейнера
+# Set working directory inside the container
 WORKDIR /app
 
-# Копируем файл с зависимостями
+# Copy dependencies file
 COPY requirements.txt .
 
-# Устанавливаем зависимости (без кэша, чтобы образ был меньше)
+# Install dependencies (no cache to reduce image size)
 RUN pip install  --no-cache-dir -r requirements.txt
 
-# Копируем весь наш код
+# Copy all project code
 COPY . .
 
-# Открываем порт, который будет слушать приложение
+# Expose the port the app will listen on
 EXPOSE 8000
 
-# Команда для запуска сервера
+# Command to run the server
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
