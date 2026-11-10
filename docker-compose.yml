@@ -10,6 +10,15 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  
+  db_test:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: glados_user
+      POSTGRES_PASSWORD: glados_password
+      POSTGRES_DB: glados_test_db
+    ports:
+      - "5433:5432"
 
   web:
     build: .
