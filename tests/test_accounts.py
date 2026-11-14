@@ -10,18 +10,17 @@ def test_create_account_success(client):
     assert data["telegram_id"] == 12345
     assert "id" in data
 
-def test_get_account_success(client):
+def test_get_account_success(client, db_session):
     create_response = client.post(
         "/api/v1/accounts",
         json={"username": "get_user", "telegram_id": 111}
     )
 
-    account_id = create_response.json()["id"]
-
+    account_id = create_response.json()["external_id"]
     response = client.get(f"/api/v1/accounts/{account_id}")
     assert response.status_code == 200
     data = response.json()
-    assert data["id"] == account_id
+    assert data["external_id"] == account_id
     assert data["username"] == "get_user"
 
 def test_create_account_duplicate_telegram_id(client):
