@@ -3,6 +3,7 @@ from datetime import datetime
 
 class AccountCreate(BaseModel):
     username: str
+    password: str
     telegram_id: int | None = None
     first_name: str | None = None
     last_name: str | None = None
@@ -19,3 +20,18 @@ class AccountResponse(BaseModel):
     updated_at: datetime
 
     model_config = {"from_attributes": True}
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+class Token(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
+
+class RefreshRequest(BaseModel):
+    refresh_token: str
+
+class LogoutRequest(BaseModel):
+    refresh_token: str

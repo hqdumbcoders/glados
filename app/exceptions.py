@@ -5,3 +5,11 @@ class AccountAlreadyExistsError(Exception):
 class AccountNotFoundError(Exception):
     """Raised when an account is not found in the database."""
     pass
+
+class InvalidCredentialsError(Exception):
+    """Raised when login or password is incorrect."""
+    pass
+
+class InvalidTokenError(Exception):
+    """Raised when a token is invalid, expired or revoked."""
+    pass
