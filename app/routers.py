@@ -13,6 +13,7 @@ def create_account(account: AccountCreate, db: Session = Depends(get_db)):
     try:
         return service.create_account(
             username=account.username,
+            password=account.password,
             telegram_id=account.telegram_id
         )
     except AccountAlreadyExistsError:

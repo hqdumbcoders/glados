@@ -8,12 +8,19 @@ class AccountRepository:
     def get_by_id(self, account_id: str) -> Account | None:
         return self.db.query(Account).filter(Account.external_id == account_id).first()
 
+    def get_by_pk(self, pk: int) -> Account | None:
+        return self.db.query(Account).filter(Account.id == pk).first()
+
     def get_by_telegram_id(self, telegram_id: int) -> Account | None:
         return self.db.query(Account).filter(Account.telegram_id == telegram_id).first()
 
-    def create(self, username: str, telegram_id: int | None = None) -> Account:
+    def get_by_username(self, username: str) -> Account | None:
+        return self.db.query(Account).filter(Account.username == username).first()
+
+    def create(self, username: str, hashed_password: str, telegram_id: int | None = None) -> Account:
         db_account = Account(
             username=username,
+            hashed_password=hashed_password,
             telegram_id=telegram_id
         )
 

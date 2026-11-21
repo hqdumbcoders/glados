@@ -27,3 +27,6 @@ starlette==1.10.0
 typing-inspection==0.4.4
 typing_extensions==4.16.0
 uvicorn==0.54.0
+passlib[bcrypt]
+bcrypt==4.0.1
+python-jose[cryptography]
