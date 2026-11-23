@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.schemas import LoginRequest, Token, RefreshRequest, LogoutRequest
 from app.auth_service import AuthService
-from app.exceptions import InvalidTokenError, InvalidCredentialsError
+from app.exceptions import InvalidCredentialsError, InvalidTokenError
 
 router = APIRouter(prefix="/api/v1/auth", tags=["auth"])
 
@@ -22,7 +22,7 @@ def login(login_data: LoginRequest, db: Session = Depends(get_db)):
 def refresh_token(data: RefreshRequest, db: Session = Depends(get_db)):
     service = AuthService(db)
     try:
-        return service.refrehs_access_token(data.refresh_token)
+        return service.refresh_access_token(data.refresh_token)
     except InvalidTokenError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -33,4 +33,4 @@ def refresh_token(data: RefreshRequest, db: Session = Depends(get_db)):
 def logout(data: LogoutRequest, db: Session = Depends(get_db)):
     service = AuthService(db)
     service.logout(data.refresh_token)
-    return {"status": "OK"}
+    return {"status": "ok"}

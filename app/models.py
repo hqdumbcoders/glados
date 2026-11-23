@@ -3,8 +3,8 @@ from sqlalchemy import Column, String, BigInteger, Integer, DateTime, func, Bool
 from app.database import Base
 
 
-class Account(Base):
-    __tablename__ = "accounts"
+class User(Base):
+    __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     external_id = Column(String, unique=True, nullable=False, default=lambda: str(uuid.uuid4()))
@@ -22,7 +22,7 @@ class RefreshToken(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     token = Column(String, unique=True, nullable=False, index=True)
-    account_id = Column(Integer, ForeignKey("accounts.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     is_revoked = Column(Boolean, default=False, nullable=False)
     expires_at = Column(DateTime(timezone=True), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
