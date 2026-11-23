@@ -1,9 +1,9 @@
-class AccountAlreadyExistsError(Exception):
-    """Raised when trying to create an account with a duplicate telegram_id."""
+class UserAlreadyExistsError(Exception):
+    """Raised when trying to create an user with a duplicate telegram_id."""
     pass
 
-class AccountNotFoundError(Exception):
-    """Raised when an account is not found in the database."""
+class UserNotFoundError(Exception):
+    """Raised when an user is not found in the database."""
     pass
 
 class InvalidCredentialsError(Exception):

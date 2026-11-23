@@ -1,14 +1,14 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-class AccountCreate(BaseModel):
+class UserCreate(BaseModel):
     username: str
     password: str
     telegram_id: int | None = None
     first_name: str | None = None
     last_name: str | None = None
 
-class AccountResponse(BaseModel):
+class UserResponse(BaseModel):
     id: int
     external_id: str
     username: str
